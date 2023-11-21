@@ -86,13 +86,15 @@ def calculate_demographic_data(print_data=True):
     (len(df.loc[df['education'] == "Bachelors", ['education']]) / len(df)) *
     100, 1)
 
-  # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
+  # What percentage of people 
+    #   with advanced education (`Bachelors`, `Masters`, or `Doctorate`) 
+    #   make more than 50K?
   # What percentage of people without advanced education make more than 50K?
 
   # with and without `Bachelors`, `Masters`, or `Doctorate`
   df50k = df.loc[df['salary'] == ">50K"]
   higher = ['Bachelors', 'Masters', 'Doctorate']
-  df50h = df50k.loc[df50k['education'].isin(higher), ['education']]
+  df50h = df50k.loc[df50k['education'].isin(higher)]
 
   higher_education = len(df50h)
   lower_education = len(df50k) - len(df50h)
@@ -100,6 +102,7 @@ def calculate_demographic_data(print_data=True):
   # percentage with salary >50K
   higher_education_rich = higher_education / len(df50k)
   lower_education_rich = lower_education / len(df50k)
+
   # What is the minimum number of hours a person works per week (hours-per-week feature)?
   min_work_hours = df['hours-per-week'].min()
 
@@ -129,7 +132,8 @@ def calculate_demographic_data(print_data=True):
   oID50kImax = df50kIo.value_counts().idxmax()
 
   import re
-  top_IN_occupation = re.sub(r',(?=\))', '', str(oID50kImax))
+  # top_IN_occupation = re.sub(r',(?=\))', '', str(oID50kImax))
+  top_IN_occupation = str(oID50kImax)
   # DO NOT MODIFY BELOW THIS LINE
 
   if print_data:
